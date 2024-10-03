@@ -6,7 +6,7 @@ const doc = {
         description: "API Documentation for CSE/week3-week4"
     },
     host: 'cse341-w3-w4.onrender.com',
-    schemes: ['http', 'https']
+    schemes: ['https']
 }
 
 const outputFile = "./swagger.json"
