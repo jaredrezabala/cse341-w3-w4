@@ -5,7 +5,7 @@ const doc = {
         title: "API Documentation",
         description: "API Documentation for CSE/week3-week4"
     },
-    host: 'localhost:3000',
+    host: 'cse341-w3-w4.onrender.com',
     schemes: ['http', 'https']
 }
 
