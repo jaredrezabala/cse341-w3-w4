@@ -7,11 +7,11 @@ const { Collection } = require('mongodb')
 const getAll = async(req, res) =>{
     //#swagger.tags=['Movies']
     try{
-    const result = await mongodb.getDatabase().db('personal-project').collection('test').find()
+    const result = await mongodb.getDatabase().db('personal-project').collection('movies').find()
         movies = await result.toArray()
         // cause error 500
-        let errorTrigger = null;
-        console.log(errorTrigger.someProperty)
+        // let errorTrigger = null;
+        // console.log(errorTrigger.someProperty)
         
         if(movies.length === 0) {
             res.status(400).json({
