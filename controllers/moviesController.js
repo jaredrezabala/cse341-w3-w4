@@ -24,10 +24,7 @@ const getSingle = async(req, res) => {
 const addMovie = async(req, res) => {
     //#swagger.tags=['Movies']
     const { title, genre, director, releaseYear, duration, rating, synopsis} = req.body
-    if(!title || !genre || !director || !releaseYear || !duration || !rating || !synopsis)
-        res.status(400).json({
-            message: "Please fill in all fields"
-    })
+    
     const newMovie = {
         title, 
         genre,
@@ -55,10 +52,7 @@ const updateMovie = async(req, res) => {
     //#swagger.tags=['Movies']
     const movieId = new ObjectId(req.params.id)
     const { title, genre, director, releaseYear, duration, rating, synopsis} = req.body
-    if(!title || !genre || !director)
-       return res.status(400).json({
-            message: "Please fill in all fields"
-    })
+
     try{
         const updateMovie = {
             $set: { title, genre, director, releaseYear, duration, rating, synopsis }
