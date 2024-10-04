@@ -6,20 +6,50 @@ const { Collection } = require('mongodb')
 
 const getAll = async(req, res) =>{
     //#swagger.tags=['Movies']
-    const result = await mongodb.getDatabase().db('personal-project').collection('movies').find()
-    result.toArray().then((movies) =>{
-        res.setHeader('Content-type', 'application/json')
-        res.status(200).json(movies)
-    })
+    try{
+    const result = await mongodb.getDatabase().db('personal-project').collection('test').find()
+        movies = await result.toArray()
+        // cause error 500
+        let errorTrigger = null;
+        console.log(errorTrigger.someProperty)
+        
+        if(movies.length === 0) {
+            res.status(400).json({
+                message: "No movies found"
+            })
+        }else{
+            res.setHeader('Content-type', 'application/json')
+            res.status(200).json(movies)
+        }
+    }catch(err){
+        res.status(500).json({
+            message: "Failed to load movies list",
+            error: err.message
+        })
+    }
+    
 }
 const getSingle = async(req, res) => {
     //#swagger.tags=['Movies']
+    try{
     const movieId = new ObjectId(req.params.id)
     const result = await mongodb.getDatabase().db('personal-project').collection('movies').find({_id: movieId})
-    result.toArray().then((movies) => {
-        res.setHeader('Content-type', 'application/json')
-        res.status(200).json(movies[0])
-    })
+    const movies = await result.toArray()
+
+    if(movies.length === 0) {
+            res.status(400).json({
+                message: "No movie found in database"
+                })
+        }else{
+            res.setHeader('Content-type', 'application/json')
+            res.status(200).json(movies[0])
+        }
+    }catch(err){
+        res.status(500).json({
+            message: "Failed to load movie",
+            error: err.message
+        })
+    }
 }
 const addMovie = async(req, res) => {
     //#swagger.tags=['Movies']
@@ -50,10 +80,9 @@ const addMovie = async(req, res) => {
 }
 const updateMovie = async(req, res) => {
     //#swagger.tags=['Movies']
+    try{
     const movieId = new ObjectId(req.params.id)
     const { title, genre, director, releaseYear, duration, rating, synopsis} = req.body
-
-    try{
         const updateMovie = {
             $set: { title, genre, director, releaseYear, duration, rating, synopsis }
         }
@@ -62,12 +91,13 @@ const updateMovie = async(req, res) => {
              res.status(404).json({
                 message: "Movie not found"
             })
+        }else{
+            res.status(200).json({
+                message: "Movie updated successfully",
+                matchedCount: result.matchedCount,
+                modifiedCount: result.modifiedCount
+            })
         }
-        res.status(200).json({
-            message: "Movie updated successfully",
-            matchedCount: result.matchedCount,
-            modifiedCount: result.modifiedCount
-        })
     }catch(err){
         res.status(500).json({
             message: "Failed to update movie",
@@ -77,18 +107,20 @@ const updateMovie = async(req, res) => {
 }
 const deleteMovie = async(req, res) => {
     //#swagger.tags=['Movies']
-    const movieId = new ObjectId(req.params.id)
     try{
+    const movieId = new ObjectId(req.params.id)
+
         const result = await mongodb.getDatabase().db('personal-project').collection('movies').deleteOne({_id: movieId})
         if (result.deletedCount === 0){
             res.status(404).json({
                 message: "Movie not found"
             })
+        }else{
+            res.status(200).json({
+                message: "Movie deleted succesfully",
+                deletedCount: result.deletedCount
+            })
         }
-        res.status(200).json({
-            message: "Movie deleted succesfully",
-            deletedCount: result.deletedCount
-        })
     }catch(err){
         res.status(500).json({
             message: "Failed to delete movie",
