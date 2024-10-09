@@ -7,9 +7,9 @@ const SwaggerUI = require('swagger-ui-express')
 const swagggerDocument = require('./swagger.json')
 const passport = require('passport')
 const session = require('express-session')
-const github = require('passport-github2')
+const githubStrategy = require('passport-github2').Strategy
 
-app.use(new github({
+app.use(new githubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: process.env.GITHUB_CALLBACK_URL
