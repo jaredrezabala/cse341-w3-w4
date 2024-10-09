@@ -7,5 +7,5 @@ router.get("/", (req, res) => {
 })
 
 router.use("/movies", require('./movies'))
-// router.use("/auth", require("./auth"))
+router.use("/auth", require("./auth"))
 module.exports = router

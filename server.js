@@ -23,7 +23,6 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: process.env.GITHUB_CALLBACK_URL
 }, (accessToken, refreshToken, profile, done) => {
-    console.log("perfil de github", profile)
     return done(null, profile);
 }))
 passport.serializeUser((user, done) => {

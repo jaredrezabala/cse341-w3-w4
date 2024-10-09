@@ -1,12 +1,26 @@
 const express = require('express');
+const router = express.Router()
+const passport = require('passport')
 
-const authenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        next()
-    }
-    else {
-        res.status(401).json("You do  not have permission to access this page")
-    }
-}
+router.get('/login', passport.authenticate('github', { 
+    //#swagger.tags=['Authorization']
+    scope: ['user:email'] }));
 
-module.exports = authenticated
+router.get('/github/callback',
+    passport.authenticate('github', { failureRedirect: '/' }),
+    (req, res) => {
+         //#swagger.tags=['Authorization']
+        res.redirect('/api-docs'); 
+    }
+);
+router.get('/logout', (req, res) => {
+     //#swagger.tags=['Authorization']
+    req.logout((err) => {
+        if(err) {
+            return res.status(400).json({ message: err.message });
+        }else{
+            res.redirect('/')
+        }
+    });
+})
+module.exports = router
