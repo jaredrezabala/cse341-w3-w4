@@ -76,7 +76,7 @@ const updateHeroe = async(req, res) => {
     const heroeId = new ObjectId(req.params.id)
     const { name, realName, powers, universe, allies, villains, introductionYear} = req.body
         const updateHeroe = {
-            $set: { title, genre, director, releaseYear, duration, rating, synopsis }
+            $set: { name, realName, powers, universe, allies, villains, introductionYear }
         }
         const result = await mongodb.getDatabase().db('personal-project').collection('superheroes').updateOne({_id: heroeId}, updateHeroe)
         if (result.matchedCount === 0){
