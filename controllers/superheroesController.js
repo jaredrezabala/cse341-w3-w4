@@ -97,7 +97,7 @@ const deleteHeroe = async(req, res) => {
     try{
     const heroeId = new ObjectId(req.params.id)
 
-        const result = await mongodb.getDatabase().db('personal-project').collection('heroes').deleteOne({_id: heroeId})
+        const result = await mongodb.getDatabase().db('personal-project').collection('superheroes').deleteOne({_id: heroeId})
         if (result.deletedCount === 0){
             res.status(404).json({
                 message: "Heroe not found"
