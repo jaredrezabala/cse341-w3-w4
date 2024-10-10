@@ -92,11 +92,7 @@ const updateMovie = async(req, res) => {
                 message: "Movie not found"
             })
         }else{
-            res.status(200).json({
-                message: "Movie updated successfully",
-                matchedCount: result.matchedCount,
-                modifiedCount: result.modifiedCount
-            })
+            res.status(204).send()
         }
     }catch(err){
         res.status(500).json({
@@ -116,10 +112,7 @@ const deleteMovie = async(req, res) => {
                 message: "Movie not found"
             })
         }else{
-            res.status(200).json({
-                message: "Movie deleted succesfully",
-                deletedCount: result.deletedCount
-            })
+            res.status(204).send()
         }
     }catch(err){
         res.status(500).json({

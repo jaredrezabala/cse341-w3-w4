@@ -84,11 +84,7 @@ const updateHeroe = async(req, res) => {
                 message: "Heroe not found"
             })
         }else{
-            res.status(200).json({
-                message: "Heroe updated successfully",
-                matchedCount: result.matchedCount,
-                modifiedCount: result.modifiedCount
-            })
+            res.status(204).send()
         }
     }catch(err){
         res.status(500).json({
@@ -107,10 +103,7 @@ const deleteHeroe = async(req, res) => {
                 message: "Heroe not found"
             })
         }else{
-            res.status(200).json({
-                message: "Heroe deleted succesfully",
-                deletedCount: result.deletedCount
-            })
+            res.status(204).send()
         }
     }catch(err){
         res.status(500).json({
