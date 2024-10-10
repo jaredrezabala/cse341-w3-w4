@@ -10,7 +10,9 @@ router.get("/", (req, res) => {
 })
 
 router.use("/movies", require('./movies'))
-//#swagger.ignore = true
+router.use("/superheroes", require('./superheroes')//#swagger.tags=['Superheroes']
+)
+
 router.get('/login', passport.authenticate('github', { 
     scope: ['user:email'] })//#swagger.ignore = true
 );

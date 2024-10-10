@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const movieController = require("../controllers/moviesController")
-const {validationRules, checkMovie} = require('../validator')
-const authentication  = require("../authorization")
+const {validationRules, checkMovie} = require('../middleware/movieValidator')
+const authentication  = require("../middleware/authorization")
 
 router.get("/", movieController.getAll)
 router.get("/:id", movieController.getSingle)
