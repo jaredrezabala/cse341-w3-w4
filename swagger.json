@@ -216,45 +216,6 @@
           }
         }
       }
-    },
-    "/auth/login": {
-      "get": {
-        "tags": [
-          "Authorization"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/auth/github/callback": {
-      "get": {
-        "tags": [
-          "Authorization"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/auth/logout": {
-      "get": {
-        "tags": [
-          "Authorization"
-        ],
-        "description": "",
-        "responses": {
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
     }
   }
 }
